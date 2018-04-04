@@ -355,7 +355,7 @@ import java.util.Arrays;
   @Override
   public long seekToUs(long positionUs) {
     // Treat all seeks into non-seekable media as being to t=0.
-    positionUs = seekMap.isSeekable() ? positionUs : 0;
+    // positionUs = seekMap.isSeekable() ? positionUs : 0;
     lastSeekPositionUs = positionUs;
     notifyDiscontinuity = false;
     // If we're not pending a reset, see if we can seek within the buffer.
@@ -378,10 +378,10 @@ import java.util.Arrays;
 
   @Override
   public long getAdjustedSeekPositionUs(long positionUs, SeekParameters seekParameters) {
-    if (!seekMap.isSeekable()) {
-      // Treat all seeks into non-seekable media as being to t=0.
-      return 0;
-    }
+//    if (!seekMap.isSeekable()) {
+//      // Treat all seeks into non-seekable media as being to t=0.
+//      return 0;
+//    }
     SeekPoints seekPoints = seekMap.getSeekPoints(positionUs);
     return Util.resolveSeekPositionUs(
         positionUs, seekParameters, seekPoints.first.timeUs, seekPoints.second.timeUs);
